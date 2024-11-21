@@ -72,3 +72,13 @@ ul {
     padding: 0;
     margin: 0;
 }
+li {
+    list-style-type: none;
+    padding: 50px;
+    letter-spacing: 3px;
+}
+p {
+    padding: 20px;
+    letter-spacing: 3px;
+    
+}

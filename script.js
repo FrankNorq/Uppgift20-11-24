@@ -2,7 +2,7 @@ const charachters = document.querySelector(".charactersboxUl");
 const detailsBaba = document.querySelector(".detailBox");
 const nextButton = document.getElementById("addButton");
 const pastButton = document.getElementById("downbutton")
-const detailBox = document.querySelector(".detailBox")
+const detailBox = document.querySelector(".TattoiinBox")
 
 let currentIndex = 0;
 let details = [];
@@ -21,7 +21,6 @@ fetch("https://swapi.dev/api/people/")
 .then((data)=>{
 renderChar(data.results)
 renderDetails(data.results)
-renderTattoiin(data.results)
     console.log( data.results);
     
 
@@ -43,8 +42,6 @@ fetch("https://swapi.dev/api/planets/")
 .then((data)=>{
 
     console.log( data.results);
-    renderChar(data.results)
-    renderDetails(data.results)
     renderTattoiin(data.results)
 
 
@@ -67,7 +64,7 @@ function renderChar(arr) {
     
     function renderDetails(arr) {
         if (arr !== undefined) {
-            detailsBaba.innerHTML = "";
+            // detailsBaba.innerHTML = "";
             for (let i = 0; i < 1; i++) {
                 const character = arr[i];
                 const detailsList = document.createElement("p")
@@ -93,7 +90,7 @@ function renderChar(arr) {
     }
 function renderTattoiin(arr) {
     if (arr !== undefined) {
-        detailBox.innerHTML = "";
+        // detailBox.innerHTML = "";
         for (let i = 0; i < 1; i++) {
             const character = arr[i];
             const tattoiinList = document.createElement("p")

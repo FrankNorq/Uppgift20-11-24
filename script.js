@@ -116,33 +116,6 @@ function renderDetails(arr) {
     displayCharacter();
 }
     
-
-function renderTattoiin(arr) {
-    if (arr !== undefined) {
-        // detailBox.innerHTML = "";
-        for (let i = 0; i < 1; i++) {
-            const character = arr[i];
-            const tattoiinList = document.createElement("p")
-            tattoiinList.innerText = `
-            Rotation period: ${character.rotation_period} 
-            Orbital period: ${character.orbital_period} 
-            Diameter: ${character. diameter}
-            Climate: ${character.climate}
-            Gravity: ${character.gravity}
-            Terrain: ${character.terrain}
-        `;
-        detailBox.appendChild(tattoiinList); 
-            console.log(detailBox);
-            
-        }
-
-    }else{
-        console.log("Array is not defined");
-        
-    }
-}
-
-
 function renderTattoiin(arr) {
     const planDiv = document.createElement("div");
     const planetName = document.createElement("h3");

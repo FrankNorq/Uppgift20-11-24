@@ -4,7 +4,8 @@ const nextButton = document.getElementById("addButton");
 const pastButton = document.getElementById("downbutton")
 const detailBox = document.querySelector(".TattoiinBox")
 
-let currentIndex = 0;
+let currentCharacterIndex = 0;
+let currentPlanetIndex = 0;
 let details = [];
 fetch("https://swapi.dev/api/people/")
 .then((response)=>{
@@ -19,9 +20,10 @@ fetch("https://swapi.dev/api/people/")
 
 })
 .then((data)=>{
-renderChar(data.results)
-renderDetails(data.results)
-    console.log( data.results);
+    let details = data.results;
+renderChar(details)
+renderDetails(details)
+    console.log( details);
     
 
 
@@ -40,9 +42,9 @@ fetch("https://swapi.dev/api/planets/")
 
 })
 .then((data)=>{
-
-    console.log( data.results);
-    renderTattoiin(data.results)
+    let details = data.results;
+    console.log( details);
+    renderTattoiin(details)
 
 
 })
@@ -62,32 +64,59 @@ function renderChar(arr) {
     }
     }
     
-    function renderDetails(arr) {
-        if (arr !== undefined) {
-            // detailsBaba.innerHTML = "";
-            for (let i = 0; i < 1; i++) {
-                const character = arr[i];
-                const detailsList = document.createElement("p")
-                detailsList.innerText = `
-                Name: ${character.name}
-                Height: ${character.height} cm
-                Mass: ${character.mass} kg
-                Hair Color: ${character.hair_color}
-                Skin Color: ${character.skin_color}
-                Eye Color: ${character.eye_color}
-                Birth Year: ${character.birth_year}
-                Gender: ${character.gender}
-            `;
-                detailsBaba.appendChild(detailsList); 
-                console.log(detailsBaba);
-                
-            }
+
+function renderDetails(arr) {
+    const charDiv = document.createElement("div");
+    const charName = document.createElement("h3");
+    const heightP = document.createElement("p");
+    const massP = document.createElement("p");
+    const hairColorP = document.createElement("p");
+    const skinColorP = document.createElement("p");
+    const eyeColorP = document.createElement("p");
+    const birthP = document.createElement("p");
+    const genderP = document.createElement("p");
+    const nextButton = document.createElement("button");
     
-        }else{
-            console.log("Array is not defined");
-            
-        }
+
+    
+    function displayCharacter() {
+        const character = arr[currentCharacterIndex];
+        
+        charName.textContent = character.name;
+        heightP.textContent = `Height: ${character.height} cm`;
+        massP.textContent = `Mass: ${character.mass} kg`;
+        hairColorP.textContent = `Hair Color: ${character.hair_color}`;
+        skinColorP.textContent = `Skin Color: ${character.skin_color}`;
+        eyeColorP.textContent = `Eye Color: ${character.eye_color}`;
+        birthP.textContent = `Birth Year: ${character.birth_year}`;
+        genderP.textContent = `Gender: ${character.gender}`;
     }
+
+  
+    nextButton.textContent = "Next Character";
+    nextButton.addEventListener("click", function () {
+        currentCharacterIndex++;
+        if (currentCharacterIndex >= arr.length) {
+            currentCharacterIndex = 0;
+        }
+        displayCharacter();
+    })
+
+    charDiv.appendChild(charName);
+    charDiv.appendChild(heightP);
+    charDiv.appendChild(massP);
+    charDiv.appendChild(hairColorP);
+    charDiv.appendChild(skinColorP);
+    charDiv.appendChild(eyeColorP);
+    charDiv.appendChild(birthP);
+    charDiv.appendChild(genderP);
+    charDiv.appendChild(nextButton);
+    detailsBaba.appendChild(charDiv);
+    
+    displayCharacter();
+}
+    
+
 function renderTattoiin(arr) {
     if (arr !== undefined) {
         // detailBox.innerHTML = "";
@@ -112,25 +141,60 @@ function renderTattoiin(arr) {
         
     }
 }
-    // nextButton.addEventListener("click" ,function () {
-    //     currentIndex++;
-    //     if (currentIndex >= charactersData.length) {
-    //         currentIndex = 0;
-    //     }
-    //     renderDetails(currentIndex);
-   
-    // })
-    // pastButton.addEventListener("click", function () {
-    //     if (currentIndex > 0) {
-    //         currentIndex--;
-    //         renderDetails(currentIndex);
-    //     } else {
-    //         alert("Det finns inga tidigare karaktärer att visa.");
-    //     }
-    // })
 
-    function updateDetails(arr) {
-        details = arr;
-        renderDetails()
-    
+
+function renderTattoiin(arr) {
+    const planDiv = document.createElement("div");
+    const planetName = document.createElement("h3");
+    const rotationPeriodP = document.createElement("p");
+    const orbitalPeriodP = document.createElement("p");
+    const diameterP = document.createElement("p");
+    const climateP = document.createElement("p");
+    const gravityP = document.createElement("p");
+    const terrainP = document.createElement("p");
+    const surfaceWaterP = document.createElement("p");
+    const populationP = document.createElement("p");
+    const nextButton = document.createElement("button");
+
+    // Function to display the current planet
+    function displayPlanet() {
+        const planet = arr[currentPlanetIndex];
+        
+        planetName.textContent = planet.name;
+        rotationPeriodP.textContent = `Rotation Period: ${planet.rotation_period} hours`;
+        orbitalPeriodP.textContent = `Orbital Period: ${planet.orbital_period} days`;
+        diameterP.textContent = `Diameter: ${planet.diameter} km`;
+        climateP.textContent = `Climate: ${planet.climate}`;
+        gravityP.textContent = `Gravity: ${planet.gravity}`;
+        terrainP.textContent = `Terrain: ${planet.terrain}`;
+        surfaceWaterP.textContent = `Surface Water: ${planet.surface_water}%`;
+        populationP.textContent = `Population: ${planet.population}`;
     }
+
+    nextButton.textContent = "Next Planet";
+    nextButton.addEventListener("click", function () {
+        currentPlanetIndex++;
+        if (currentPlanetIndex >= arr.length) {
+            currentPlanetIndex = 0; // Loop back to the first planet
+        }
+        displayPlanet();
+    });
+
+    // Append all elements to the charDiv
+    planDiv.appendChild(planetName);
+    planDiv.appendChild(rotationPeriodP);
+    planDiv.appendChild(orbitalPeriodP);
+    planDiv.appendChild(diameterP);
+    planDiv.appendChild(climateP);
+    planDiv.appendChild(gravityP);
+    planDiv.appendChild(terrainP);
+    planDiv.appendChild(surfaceWaterP);
+    planDiv.appendChild(populationP);
+    planDiv.appendChild(nextButton);
+
+    // Append charDiv to a parent container (assuming it exists)
+    detailBox.appendChild(planDiv);
+    
+    // Display the first planet
+    displayPlanet();
+}

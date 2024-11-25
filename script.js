@@ -6,7 +6,6 @@ const detailBox = document.querySelector(".TattoiinBox")
 
 let currentCharacterIndex = 0;
 let currentPlanetIndex = 0;
-let details = [];
 fetch("https://swapi.dev/api/people/")
 .then((response)=>{
     if (!response.ok) {
@@ -129,7 +128,6 @@ function renderTattoiin(arr) {
     const populationP = document.createElement("p");
     const nextButton = document.createElement("button");
 
-    // Function to display the current planet
     function displayPlanet() {
         const planet = arr[currentPlanetIndex];
         
@@ -148,12 +146,11 @@ function renderTattoiin(arr) {
     nextButton.addEventListener("click", function () {
         currentPlanetIndex++;
         if (currentPlanetIndex >= arr.length) {
-            currentPlanetIndex = 0; // Loop back to the first planet
+            currentPlanetIndex = 0; 
         }
         displayPlanet();
     });
 
-    // Append all elements to the charDiv
     planDiv.appendChild(planetName);
     planDiv.appendChild(rotationPeriodP);
     planDiv.appendChild(orbitalPeriodP);
@@ -165,9 +162,7 @@ function renderTattoiin(arr) {
     planDiv.appendChild(populationP);
     planDiv.appendChild(nextButton);
 
-    // Append charDiv to a parent container (assuming it exists)
     detailBox.appendChild(planDiv);
     
-    // Display the first planet
     displayPlanet();
 }
